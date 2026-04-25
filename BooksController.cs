@@ -2,17 +2,13 @@
 
 namespace LibraryManagementSystem;
 
-internal static class BooksController
+internal class BooksController
 {
 
-    private static List<string> books = new List<string>()
-    {
-        "The Great Gatsby", "To Kill a Mockingbird", "1984", "Pride and Prejudice", "The Catcher in the Rye", "The Hobbit", "Moby-Dick", "War and Peace", "The Odyssey", "The Lord of the Rings", "Jane Eyre", "Animal Farm", "Brave New World", "The Chronicles of Narnia", "The Diary of a Young Girl", "The Alchemist", "Wuthering Heights", "Fahrenheit 451", "Catch-22", "The Hitchhiker's Guide to the Galaxy"
-    };
-    internal static void ViewBooks()
+    internal void ViewBooks()
     {
         AnsiConsole.MarkupLine("[yellow] List of Books: [/]");
-        foreach (var book in books)
+        foreach (var book in MockDatabase.Books)
         {
             AnsiConsole.MarkupLine($" [cyan] {book}[/]");
         }
@@ -20,14 +16,14 @@ internal static class BooksController
         AnsiConsole.MarkupLine("Press Any Keys to Continue.");
         Console.ReadKey();
     }
-    internal static void AddBooks()
+    internal void AddBooks()
     {
         var title = AnsiConsole.Ask<string>("Enter the [cyan]title[/] of the bool to add");
-        if (books.Contains(title))
+        if (MockDatabase.Books.Contains(title))
             AnsiConsole.MarkupLine("[red]This book already exists [/]");
         else
         {
-            books.Add(title);
+            MockDatabase.Books.Add(title);
             AnsiConsole.MarkupLine("[green] Book added successfully![/]");
         }
 
@@ -35,9 +31,9 @@ internal static class BooksController
         Console.ReadKey();
     }
 
-    internal static void DeleteBooks()
+    internal void DeleteBooks()
     {
-        if (books.Count == 0)
+        if (MockDatabase.Books.Count == 0)
         {
             AnsiConsole.MarkupLine("[red] No books to delete.[/]");
             Console.ReadKey();
@@ -47,10 +43,10 @@ internal static class BooksController
         var bookToDelete = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
             .Title("Select a [red]book[/] to Delete")
-            .AddChoices(books));
-        if (books.Contains(bookToDelete))
+            .AddChoices(MockDatabase.Books));
+        if (MockDatabase.Books.Contains(bookToDelete))
         {
-            books.Remove(bookToDelete);
+            MockDatabase.Books.Remove(bookToDelete);
             AnsiConsole.MarkupLine("[red]Book deleted successfully![/]");
         }
         else
