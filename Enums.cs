@@ -2,10 +2,17 @@ namespace LibraryManagementSystem;
 
 internal class Enums
 {
-    internal enum MenuOption
+    internal enum MenuAction
     {
-        Viewbooks,
-        AddBook,
-        DeleteBook
+        ViewItem,
+        AddItem,
+        DeleteItem
+    }
+
+    internal enum ItemType
+    {
+        Book,
+        Magazine,
+        Newspaper
     }
 }
